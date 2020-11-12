@@ -1,0 +1,21 @@
+{
+  "name": "hexagoner",
+  "version": "1.0.0",
+  "description": "A 2D hexagon animation on an HTML canvas.",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/discosultan/hexagoner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/discosultan/hexagoner/issues"
+  },
+  "homepage": "https://github.com/discosultan/hexagoner#readme",
+  "types": "index.d.ts"
+}
