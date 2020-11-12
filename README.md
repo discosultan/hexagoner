@@ -1,5 +1,5 @@
 # hexagoner
 
-A 2D hexagon animation on an HTML canvas.
+A 2D hexagon animation on HTML canvas
 
 ![Preview](hexagoner.gif)
