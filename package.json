@@ -1,6 +1,6 @@
 {
   "name": "hexagoner",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A 2D hexagon animation on an HTML canvas.",
   "main": "dist/index.js",
   "scripts": {
@@ -17,5 +17,8 @@
     "url": "https://github.com/discosultan/hexagoner/issues"
   },
   "homepage": "https://github.com/discosultan/hexagoner#readme",
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  }
 }

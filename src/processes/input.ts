@@ -3,8 +3,11 @@ import { Shape } from "../shape";
 import { ProcessProps } from "./process";
 import { ContourTrail } from "./trails";
 
-export class ResolveProcessesOnEscape extends Process {
-  constructor(processProps: Partial<Omit<ProcessProps, "endless">>) {
+export class ResolveProcessesOnKeyDown extends Process {
+  constructor(
+    private readonly keys: string[],
+    processProps?: Partial<Omit<ProcessProps, "endless">>,
+  ) {
     super({ ...processProps, endless: true });
   }
 
@@ -20,7 +23,7 @@ export class ResolveProcessesOnEscape extends Process {
   }
 
   onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && this.manager !== null) this.manager.resolveAll();
+    if (this.keys.indexOf(e.key) >= 0 && this.manager !== null) this.manager.resolveAll();
   };
 }
 

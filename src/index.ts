@@ -8,7 +8,7 @@ import {
   GenerateRect,
   GenerateRectDiagonally,
   Navigation,
-  ResolveProcessesOnEscape,
+  ResolveProcessesOnKeyDown,
   Rotate,
   Translate,
   Wait,
@@ -33,7 +33,8 @@ type ShapeMeta = Omit<ShapeMetaProps, "src"> & { image: HTMLImageElement };
 
 export type Props = {
   shapes: ShapeMetaProps[],
-  font: string,
+  primaryFont: string,
+  secondaryFont: string,
   primaryColor: string,
   primaryText: string,
   secondaryText: string,
@@ -43,7 +44,8 @@ export function start(canvas: HTMLCanvasElement, props: Props) {
   const shapes = mapShapeImages(props.shapes);
   Promise.all([
     ...shapes.map(shape => preloadImage(shape.image)),
-    preloadFont(canvas, props.font),
+    preloadFont(canvas, props.primaryFont),
+    preloadFont(canvas, props.secondaryFont),
   ]).then(() => run(canvas, { ...props, shapes }));
 }
 
@@ -169,17 +171,17 @@ function run(canvas: HTMLCanvasElement, props: Omit<Props, "shapes"> & { shapes:
     translation: new Vec2(60, -textRectHeight * 0.5),
   });
   shapes.push(textRect);
-  function createText(text: string, translation: Vec2, scale: Vec2) {
+  function createText(text: string, translation: Vec2, scale: Vec2, font: string) {
     return Shape.rect(0, 0, textRectWidth, textRectHeight * 0.5, {
-      renderer: new TextRenderer(text, props.font, undefined, props.primaryColor),
+      renderer: new TextRenderer(text, font, undefined, props.primaryColor),
       translation: translation,
       scale: scale,
     });
   }
-  textRect.push(createText(props.primaryText, new Vec2(0, 10), new Vec2(1, 1)));
-  textRect.push(
-    createText(props.secondaryText, new Vec2(0, textRectHeight + 10), new Vec2(1, 0.6))
-  );
+  textRect.push(createText(props.primaryText, new Vec2(0, 10), new Vec2(1, 1), props.primaryFont));
+  textRect.push(createText(
+    props.secondaryText, new Vec2(0, textRectHeight + 10), new Vec2(1, 0.6), props.secondaryFont
+  ));
 
   processManager.push(
     // The wait process is for testing purposes.
@@ -246,7 +248,7 @@ function run(canvas: HTMLCanvasElement, props: Omit<Props, "shapes"> & { shapes:
     );
   }
 
-  processManager.push(new ResolveProcessesOnEscape({}));
+  processManager.push(new ResolveProcessesOnKeyDown(['Escape', 'Space']));
 
   // Render loop.
   let prevTimestamp = 0;

@@ -39,13 +39,13 @@ export class StrokeRenderer implements Renderer {
 export class TextRenderer implements Renderer {
   constructor(
     private readonly text: string,
-    private readonly font: string = "Arial",
+    private readonly font: string = "15px Arial",
     private readonly textAlign: CanvasTextAlign = "start",
     private readonly fillStyle: string = "#EA2E49",
   ) {}
 
   render(ctx: CanvasRenderingContext2D, shape: Shape) {
-    ctx.font = `${shape.worldBoundingRect.height}px ${this.font}`;
+    ctx.font = this.font;
     ctx.textAlign = this.textAlign;
     ctx.fillStyle = this.fillStyle;
     const { x, y, height } = shape.worldBoundingRect;

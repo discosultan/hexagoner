@@ -5,5 +5,5 @@ export {
   GenerateRect,
   GenerateRectDiagonally,
 } from "./generation";
-export { ResolveProcessesOnEscape, Navigation } from "./input";
+export { ResolveProcessesOnKeyDown, Navigation } from "./input";
 export { ContourTrail } from "./trails";
