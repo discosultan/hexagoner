@@ -248,7 +248,8 @@ function run(canvas: HTMLCanvasElement, props: Omit<Props, "shapes"> & { shapes:
     );
   }
 
-  processManager.push(new ResolveProcessesOnKeyDown(['Escape', 'Space']));
+  // Newer browser return ' ' while older return 'Spacebar'.
+  processManager.push(new ResolveProcessesOnKeyDown(['Escape', ' ', 'Spacebar']));
 
   // Render loop.
   let prevTimestamp = 0;
